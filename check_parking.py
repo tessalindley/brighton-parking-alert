@@ -28,9 +28,10 @@ def check_parking():
         return weekend_available(page_text)
 
 
-if check_parking():
-    print("🚨 Brighton WEEKEND parking availability detected!")
-    exit(1)   # fail job → GitHub sends email
+if True:
+    print("🚨 TEST: Brighton WEEKEND parking availability detected!")
+    exit(1)
 else:
     print("No weekend availability yet.")
     exit(0)
+
