@@ -44,12 +44,9 @@ def check_parking():
         available_dates = []
 
         for date_str in get_dates_to_check():
-            print("here2")
             try:
-                print("here3")
-                button = page.locator(f"'{date_str}'")
-                print("here4")
-                background_color = locator.evaluate("(element) => window.getComputedStyle(element).getPropertyValue('font-size')")
+                button = page.get_by_label(f"'{date_str}'")
+                background_color = locator.evaluate("(element) => window.getComputedStyle(element).getPropertyValue('background-color')")
                 print(background_color)
                 if button and not button:
                     available_dates.append(date_str)
