@@ -29,10 +29,12 @@ def get_dates_to_check():
         if h >= today:
             dates.append(h.strftime("%Y-%m-%d"))
 
+    print(dates)
     return dates
 
 def check_parking():
     with sync_playwright() as p:
+        print("here")
         browser = p.chromium.launch(headless=True)
         page = browser.new_page()
         page.goto(URL, timeout=60000)
@@ -51,6 +53,7 @@ def check_parking():
                 continue
 
         browser.close()
+        print(available_dates)
         return available_dates
 
 
