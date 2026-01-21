@@ -31,7 +31,7 @@ jobs:
         if: ${{ steps.set_result.outputs.my_output != 'none' }}
         uses: cinotify/github-action@main
         with:
-          to: 'tomcbaskin@gmail.com'
+          to: 'tessalindley@gmail.com'
           subject: 'check'
           body: "${{ steps.set_result.outputs.my_output }}"
           type: 'text/html'
