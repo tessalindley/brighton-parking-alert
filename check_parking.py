@@ -8,6 +8,11 @@ def get_dates_to_check():
     today = datetime.today()
     dates = []
 
+    # Find the next Friday
+    days_until_friday = (4 - today.weekday()) % 7
+    next_friday = today + timedelta(days=days_until_friday)
+    dates.append(next_friday.strftime("%Y-%m-%d"))
+
     # Find the next Saturday
     days_until_saturday = (5 - today.weekday()) % 7
     next_saturday = today + timedelta(days=days_until_saturday)
