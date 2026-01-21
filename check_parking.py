@@ -12,22 +12,22 @@ def get_dates_to_check():
     days_until_friday = (4 - today.weekday()) % 7
     next_friday = today + timedelta(days=days_until_friday)
     #next_friday = next_friday + timedelta(days=38)
-    dates.append(next_friday.strftime("%Y-%m-%d"))
+    dates.append(next_friday.strftime("%B %d"))
 
     # Find the next Saturday
     days_until_saturday = (5 - today.weekday()) % 7
     next_saturday = today + timedelta(days=days_until_saturday)
-    dates.append(next_saturday.strftime("%Y-%m-%d"))
+    dates.append(next_saturday.strftime("%B %d"))
 
     # Next Sunday
     next_sunday = next_saturday + timedelta(days=1)
-    dates.append(next_sunday.strftime("%Y-%m-%d"))
+    dates.append(next_sunday.strftime("%B %d"))
 
     # Holidays to check if still in the future
     holidays = [datetime(2026, 1, 20), datetime(2026, 2, 17)]
     for h in holidays:
         if h >= today:
-            dates.append(h.strftime("%Y-%m-%d"))
+            dates.append(h.strftime("%B %d"))
 
     print(dates)
     return dates
