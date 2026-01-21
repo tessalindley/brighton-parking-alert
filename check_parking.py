@@ -11,7 +11,7 @@ def get_dates_to_check():
     # Find the next Friday
     days_until_friday = (4 - today.weekday()) % 7
     next_friday = today + timedelta(days=days_until_friday)
-    next_friday = next_friday + timedelta(days=38)
+    #next_friday = next_friday + timedelta(days=38)
     dates.append(next_friday.strftime("%Y-%m-%d"))
 
     # Find the next Saturday
