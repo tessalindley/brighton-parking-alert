@@ -27,7 +27,9 @@ jobs:
         id: set_result
         run: python check_parking.py 
       
-      - uses: cinotify/github-action@main
+      - name: Send Email
+        if: ${{ steps.set_result.outputs.my_output != 'none' }}
+        uses: cinotify/github-action@main
         with:
           to: 'tomcbaskin@gmail.com'
           subject: 'check'
