@@ -12,22 +12,22 @@ def get_dates_to_check():
     days_until_friday = (4 - today.weekday()) % 7
     next_friday = today + timedelta(days=days_until_friday)
     #next_friday = next_friday + timedelta(days=38)
-    dates.append(next_friday.strftime("%B %d"))
+    dates.append(next_friday.strftime("%A, %B %d, %Y"))
 
     # Find the next Saturday
     days_until_saturday = (5 - today.weekday()) % 7
     next_saturday = today + timedelta(days=days_until_saturday)
-    dates.append(next_saturday.strftime("%B %d"))
+    dates.append(next_saturday.strftime("%A, %B %d, %Y"))
 
     # Next Sunday
     next_sunday = next_saturday + timedelta(days=1)
-    dates.append(next_sunday.strftime("%B %d"))
+    dates.append(next_sunday.strftime("%A, %B %d, %Y"))
 
     # Holidays to check if still in the future
     holidays = [datetime(2026, 1, 20), datetime(2026, 2, 17)]
     for h in holidays:
         if h >= today:
-            dates.append(h.strftime("%B %d"))
+            dates.append(h.strftime("%A, %B %d, %Y"))
 
     print(dates)
     return dates
@@ -46,8 +46,10 @@ def check_parking():
 
         for date_str in get_dates_to_check():
             try:
-                button = page.query_selector(f"[data-date='{date_str}']")
-                if button and not button.is_disabled():
+                button = page.locator(f"'{date_str}'")
+                background_color = locator.evaluate("(element) => window.getComputedStyle(element).getPropertyValue('font-size')")
+                print(background_color)
+                if button and not button:
                     available_dates.append(date_str)
             except:
                 continue
