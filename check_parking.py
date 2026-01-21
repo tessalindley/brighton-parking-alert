@@ -34,7 +34,6 @@ def get_dates_to_check():
 
 def check_parking():
     with sync_playwright() as p:
-        print("here")
         browser = p.chromium.launch(headless=True)
         page = browser.new_page()
         page.goto(URL, timeout=60000)
@@ -45,8 +44,11 @@ def check_parking():
         available_dates = []
 
         for date_str in get_dates_to_check():
+            print("here2")
             try:
+                print("here3")
                 button = page.locator(f"'{date_str}'")
+                print("here4")
                 background_color = locator.evaluate("(element) => window.getComputedStyle(element).getPropertyValue('font-size')")
                 print(background_color)
                 if button and not button:
