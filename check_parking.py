@@ -46,11 +46,26 @@ def check_parking():
         browser.close()
         return available_dates
 
+
+def create_env_var(message):
+    # Get the path to the GITHUB_OUTPUT file
+    output_file = os.getenv('GITHUB_OUTPUT')
+    
+    # Write the output variable to the file in the format "variable_name=value"
+    if output_file:
+        with open(output_file, "a") as f:
+            f.write(f"my_output={message}\n")
+    return
+    
 # Main
 available = check_parking()
 if available:
-    print("Brighton parking available for these dates:", available)
+    output_text = "Brighton parking available for these dates: " + available
+    print(output_text)
+    create_env_var(output_text)
     exit(1)  # triggers GitHub email
 else:
-    print("No availability for the next weekend or holidays yet.")
+    output_text = "No availability for the next weekend or holidays yet."
+    print(output_text)
+    create_env_var(output_text)
     exit(0)
