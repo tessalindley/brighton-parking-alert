@@ -3,9 +3,7 @@ from datetime import datetime, timedelta
 
 URL = "https://reservenski.parkbrightonresort.com/select-parking"
 
-
 def get_dates_to_check():
-    print("get_dates_to_check ran")
     today = datetime.today()
     dates = []
 
@@ -27,7 +25,6 @@ def get_dates_to_check():
     return dates
 
 def check_parking():
-    print("check_parking")
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
         page = browser.new_page()
@@ -50,7 +47,6 @@ def check_parking():
         return available_dates
 
 # Main
-print("check_parking.py ran")
 available = check_parking()
 if available:
     print("Brighton parking available for these dates:", available)
