@@ -68,5 +68,5 @@ if available:
 else:
     output_text = "No availability for the next weekend or holidays yet."
     print(output_text)
-    create_env_var(output_text)
+    create_env_var("none")
     exit(0)
