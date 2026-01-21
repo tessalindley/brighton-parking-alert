@@ -24,3 +24,10 @@ jobs:
       - name: Check parking
         run: |
           python check_parking.py
+      - uses: cinotify/github-action@main
+        with:
+          to: 'tomcbaskin@gmail.com'
+          subject: 'check'
+          body: '<em>This is a notification from GitHub actions. Test 1 </em>'
+          type: 'text/html'
+          # attachment: 'artifacts.zip'
