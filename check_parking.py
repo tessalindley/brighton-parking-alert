@@ -29,7 +29,7 @@ def get_dates_to_check():
         if h >= today:
             dates.append(h.strftime("%Y-%m-%d"))
 
-    print(dates)
+    print("dates: " + dates)
     return dates
 
 def check_parking():
@@ -53,7 +53,7 @@ def check_parking():
                 continue
 
         browser.close()
-        print(available_dates)
+        print("avail d: " + available_dates)
         return available_dates
 
 
