@@ -28,6 +28,6 @@ jobs:
         with:
           to: 'tomcbaskin@gmail.com'
           subject: 'check'
-          body: output.txt + '<em>This is a notification from GitHub actions. Test 1 </em>'
+          body: cat output.txt
           type: 'text/html'
           # attachment: 'artifacts.zip'
