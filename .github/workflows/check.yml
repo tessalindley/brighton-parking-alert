@@ -7,6 +7,8 @@ on:
 
 jobs:
   check:
+    env:
+      OUT_VAR: 'empty'
     runs-on: ubuntu-latest
 
     steps:
@@ -22,12 +24,13 @@ jobs:
           playwright install chromium
 
       - name: Check parking
-        run: |
-          python check_parking.py > output.txt
+        id: set_result
+        run: python check_parking.py 
+      
       - uses: cinotify/github-action@main
         with:
           to: 'tomcbaskin@gmail.com'
           subject: 'check'
-          body: cat output.txt
+          body: "${{ steps.set_result.outputs.my_output }}"
           type: 'text/html'
           # attachment: 'artifacts.zip'
