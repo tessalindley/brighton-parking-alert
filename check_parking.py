@@ -32,6 +32,28 @@ def get_dates_to_check():
     print(dates)
     return dates
 
+def format_date(dt: datetime) -> str:
+    """
+    Returns: 'Saturday, January 31, 2026'
+    Handles platform differences for day formatting.
+    """
+    try:
+        # Unix-style (no leading zero)
+        return dt.strftime("%A, %B %-d, %Y")
+    except ValueError:
+        # Windows fallback
+        return dt.strftime("%A, %B %d, %Y").replace(" 0", " ")
+
+def stuff(dates):
+    # Convert datetimes → formatted strings
+    date_strings = [format_date(dt) for dt in dates]
+
+    # Escape strings for regex safety
+    escaped_dates = [re.escape(ds) for ds in date_strings]
+
+    # Build a single regex that matches any of the dates
+    DATE_REGEX = re.compile(rf"\b({'|'.join(escaped_dates)})\b")
+
 def check_parking():
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
@@ -45,16 +67,28 @@ def check_parking():
 
         for date_str in get_dates_to_check():
             try:
-                buttonA = page.locator(f"'[aria-label="{date_str}"]'")
-                print(buttonA)
-                button = page.get_by_label(date_str)
-                print(button)
-                background_color = locator.evaluate("(element) => window.getComputedStyle(element).getPropertyValue('background-color')")
-                print(background_color)
-                if button and not button:
-                    available_dates.append(date_str)
-            except:
-                continue
+                elements = page.locator("aria-label").all()
+                for el in elements:
+                    aria_label = el.get_attribute("aria-label")
+                    if aria_label and DATE_REGEX.search(aria_label):
+                        print(f"Matched aria-label: {aria_label}")
+                        # el.click() # optional
+                        background_color =  el.evaluate("el => window.getComputedStyle(el).backgroundColor")
+                        if (background_color):
+                            print(background_color)
+                            available_dates.append(date_str)
+
+# browser.close()
+#                 buttonA = page.locator(f"'[aria-label="{date_str}"]'")
+#                 print(buttonA)
+#                 button = page.get_by_label(date_str)
+#                 print(button)
+#                 background_color = locator.evaluate("(element) => window.getComputedStyle(element).getPropertyValue('background-color')")
+#                 print(background_color)
+#                 if button and not button:
+#                     available_dates.append(date_str)
+#             except:
+#                 continue
 
         browser.close()
         print(available_dates)
