@@ -88,13 +88,13 @@ def get_green_date_elements(page, date_regex: re.Pattern):
         if not aria_label or not date_regex.search(aria_label):
             continue
     
-    background_color = el.evaluate(
-    "el => window.getComputedStyle(el).backgroundColor"
-    )
+        background_color = el.evaluate(
+        "el => window.getComputedStyle(el).backgroundColor"
+        )
     
-    if is_green(background_color):
-        green_elements.append(el)
-        print(f"Green date found: {aria_label} ({background_color})")
+        if is_green(background_color):
+            green_elements.append(el)
+            print(f"Green date found: {aria_label} ({background_color})")
 
     return green_elements
 
