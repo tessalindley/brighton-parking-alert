@@ -81,7 +81,7 @@ def get_green_date_elements(page, date_regex: re.Pattern):
     AND whose background color is green.
     """
     green_elements = []
-    
+    page.wait_for_selector("div[aria-label]")
     elements = page.locator("div[aria-label]").all()
     print(elements)
     for el in elements:
