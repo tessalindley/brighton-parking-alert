@@ -83,7 +83,7 @@ def get_green_date_elements(page, date_regex: re.Pattern):
     green_elements = []
     
     elements = page.locator("[aria-label]").all()
-    
+    print(elements)
     for el in elements:
         print(el)
         aria_label = el.get_attribute("aria-label")
