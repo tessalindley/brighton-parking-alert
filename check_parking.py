@@ -1,6 +1,7 @@
 from playwright.sync_api import sync_playwright
 from datetime import datetime, timedelta
 import re
+import os
 
 
 # ---------- Date formatting ----------
@@ -116,6 +117,7 @@ def main():
         datetime(2026, 1, 1), # New Year's Day
         datetime(2026, 7, 4), # Independence Day
         datetime(2026, 12, 25), # Christmas
+        datetime(2026, 2, 6), # custom holiday
     ]
     
     target_dates = get_next_target_dates(holidays=holidays)
